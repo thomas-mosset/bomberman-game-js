@@ -137,7 +137,13 @@ function clear_explosion(bomb_position) {
 // Check if the player collided with an explosion (not a bomb)
 function check_collision() {
     const player_cell = cells[player_position.row * board_size + player_position.column];
+
     if (player_cell.classList.contains('explosion')) {  // Check only for explosion, not bomb
+        game_over = true;
+        end_game();
+    }
+
+    if (player_cell.classList.contains('bomb')) {  // Check for bomb
         game_over = true;
         end_game();
     }
@@ -173,8 +179,6 @@ function end_game() {
 
 // Reset the game when "Play Again?" is clicked
 function reset_game() {
-    console.log("reset_game");
-
     game_over = false;
     player_position = { row: 0, column: 0 };
     bombs = [];
