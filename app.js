@@ -27,10 +27,10 @@ function create_board() {
 // Draw the player on the board
 function draw_player() {
     if (game_over) return; // Don't update the board if game is over
-    clear_board();
+    clear_board(); // Clear previous drawings
     const player_cell = cells[player_position.row * board_size + player_position.column];
-    player_cell.classList.add('player');
-    check_collision(player_cell); // Check if player collided with a bomb or explosion
+    player_cell.classList.add('player'); // Add player class to the correct cell
+    check_collision(); // Check if player collided with a bomb or explosion
 }
 
 // Clear the board except for bombs and explosions
@@ -179,9 +179,9 @@ function end_game() {
 
 // Reset the game when "Play Again?" is clicked
 function reset_game() {
-    game_over = false;
-    player_position = { row: 0, column: 0 };
-    bombs = [];
+    game_over = false;  // Reset the game over flag
+    player_position = { row: 0, column: 0 };  // Reset player position
+    bombs = [];  // Clear the bombs array
     
     // Remove game over message and button
     if (game_over_message) {
@@ -194,9 +194,9 @@ function reset_game() {
         play_again_button = null; // Ensure to clear reference
     }
 
-    // Clear the board and restart game
-    create_board();
-    draw_player();
+    // Clear the board and restart the game
+    create_board();  // Create a new game board
+    draw_player();   // Draw the player on the new board
 
     // Restart bomb placement with 2000 ms interval
     bomb_placing_interval = setInterval(() => {
